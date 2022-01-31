@@ -24,7 +24,9 @@ export default function Header() {
           <Link to='/about'>Services</Link>
         </div>
 
-        <Button variant="contained" className='landing_login'>Dashboard Login</Button>
+        <Link to='/login'>
+          <Button variant="contained" className='landing_login'>Dashboard Login</Button>
+        </Link>
           
       </div>
 

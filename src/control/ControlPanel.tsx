@@ -1,0 +1,54 @@
+
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Login from '../landing/Login'
+import { Topbar } from './Topbar';
+import { Sidebar } from './Sidebar';
+import { Home } from './pages/Home';
+import { Analytics } from './pages/Analytics';
+import { Users } from './pages/Users';
+import { Servers } from './pages/Servers';
+import { Settings } from './pages/Settings';
+
+export default function ControlPanel() {
+  const [mainpage, setMainPage] = useState({ page: "HOME"});
+
+  //@todo: replace with some kind of token checking
+  if (sessionStorage["token"] == null) {
+    return (
+      <React.Fragment>
+        <Login/>
+      </React.Fragment>
+    );
+  }
+
+  function get_contents(p : string) {
+    console.log("reload");
+    
+    if (p == "ANALYTICS")
+      return (<Analytics/>);
+    else if (p == "SERVERS")
+      return (<Servers/>);
+    else if (p == "USERS")
+      return (<Users/>);
+    else if (p == "ANALYTICS")
+      return (<Analytics/>);
+    else if (p == "SETTINGS")
+      return (<Settings/>);
+    else
+      return (<Home/>);
+  }
+
+  return(
+    <React.Fragment>
+        <Topbar/>
+        <div className='sidebar_main_content_wrapper'>
+          <div className='sidebar_item'><Sidebar setMainCallback={setMainPage}/></div>
+
+          <div className='main_content_item'>
+            { get_contents(mainpage.page) }
+          </div>
+        </div>
+    </React.Fragment>);
+      
+}
