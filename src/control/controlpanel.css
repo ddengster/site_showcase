@@ -23,6 +23,21 @@
   margin-right: 10px;
 }
 
+.topbar_settings_content {
+  position: relative;
+
+  text-align: right;
+  
+  display: none;
+  background-color: #807d7d;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  
+  /* @todo: figure out how to set menu background color  */
+}
+
 .topbar_notifications_icon_badge {
   position: relative;
   right: 9px;

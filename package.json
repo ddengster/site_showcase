@@ -23,6 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "backend": "node ./server_src/server.tsx",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -3,8 +3,34 @@ import { Language, Settings } from '@mui/icons-material';
 import React from 'react'
 import './controlpanel.css';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from 'react-router-dom';
+import { IProps } from './Sidebar';
 
-export function Topbar() {
+export function Topbar(props : IProps) {
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = React.useState<null | SVGSVGElement>(null);
+  const [show, showMenu] = React.useState(false);
+  
+
+  const toggleSettingsMenu = (event : React.MouseEvent<SVGSVGElement>) => {
+    showMenu(!show);
+    setAnchorEl(event.currentTarget);
+  };
+  const closeSettingsMenu = () => {
+    showMenu(false);
+  };
+  const gotoSettingsPage = () => {
+    closeSettingsMenu();
+    props.setMainCallback({ page: "SETTINGS"});
+  };
+  const logout = () => {
+    closeSettingsMenu();
+    sessionStorage.clear();
+    navigate('/login');
+  };
+
 
   return (
     <div className='topbar'>
@@ -20,7 +46,19 @@ export function Topbar() {
             <Language style={{zIndex:'0', color:'cyan'}}/>
           </div>
           <div className='topbar_icon_item'>
-            <Settings style={{zIndex:'0', color:'cyan'}}/>
+            <Settings style={{zIndex:'0', color:'cyan'}} onClick={toggleSettingsMenu}/>
+            <div className='topbar_settings_content'>
+              <Menu id="settings_menu" open={show} anchorEl={anchorEl} 
+                onClose={closeSettingsMenu} 
+                sx={
+                  {
+                    left:'-40px',
+                    textAlign:'right'
+                  }}>
+                <MenuItem onClick={gotoSettingsPage}>Settings</MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
+              </Menu>
+            </div>
           </div>
         </span>
       </div>

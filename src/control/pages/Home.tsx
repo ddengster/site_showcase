@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import {
   LineChart,
@@ -12,34 +12,23 @@ import {
   Legend,
 } from "recharts";
 
-export function Home() {
+export function getUserChartData() {
+  return fetch('http://localhost:8080/user_chart')
+    .then(data => data.json());
+}
 
-  const data = [
-    {
-      name: 'A',
-      uv: 100,
-      pv: 100,
-      amt: 200
-    },
-    {
-      name: 'B',
-      uv: 2000,
-      pv: 300,
-      amt: 400
-    },
-    {
-      name: 'C',
-      uv: 500,
-      pv: 600,
-      amt: 700
-    },
-    {
-      name: 'D',
-      uv: 1100,
-      pv: 1200,
-      amt: 2400
-    },
-  ];
+export function Home() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    getUserChartData()
+      .then(items => {
+        if (mounted) {
+          setData(items);
+        }
+      });
+  }, []);
 
   return (
     <React.Fragment>

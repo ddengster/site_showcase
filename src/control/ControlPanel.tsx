@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Login from '../landing/Login'
 import { Topbar } from './Topbar';
 import { Sidebar } from './Sidebar';
@@ -17,7 +16,8 @@ export default function ControlPanel() {
   if (sessionStorage["token"] == null) {
     return (
       <React.Fragment>
-        <Login/>
+        DENIED, REDIRECTING..
+        <meta http-equiv="Refresh" content="0; url='http://localhost:3000/login'" />
       </React.Fragment>
     );
   }
@@ -25,15 +25,15 @@ export default function ControlPanel() {
   function get_contents(p : string) {
     console.log("reload");
     
-    if (p == "ANALYTICS")
+    if (p === "ANALYTICS")
       return (<Analytics/>);
-    else if (p == "SERVERS")
+    else if (p === "SERVERS")
       return (<Servers/>);
-    else if (p == "USERS")
+    else if (p === "USERS")
       return (<Users/>);
-    else if (p == "ANALYTICS")
+    else if (p === "ANALYTICS")
       return (<Analytics/>);
-    else if (p == "SETTINGS")
+    else if (p === "SETTINGS")
       return (<Settings/>);
     else
       return (<Home/>);
@@ -41,7 +41,7 @@ export default function ControlPanel() {
 
   return(
     <React.Fragment>
-        <Topbar/>
+        <Topbar setMainCallback={setMainPage}/>
         <div className='sidebar_main_content_wrapper'>
           <div className='sidebar_item'><Sidebar setMainCallback={setMainPage}/></div>
 
