@@ -13,8 +13,6 @@ import { isExpired } from "react-jwt";
 export default function ControlPanel() {
   const [mainpage, setMainPage] = useState({ page: "HOME"});
 
-  //@todo: replace with some kind of token checking
-
   if (sessionStorage["token"] == null || (sessionStorage["token"] && isExpired(sessionStorage["token"]))) {
     return (
       <React.Fragment>

@@ -48,7 +48,7 @@ export default function Login() {
           <p><input type="password" onChange = {e => setPassword(e.target.value)} /></p>
           
           {
-            (denied == true) ? (<p className="login_denied">Access Denied</p>) : (<span></span>)
+            (denied === true) ? (<p className="login_denied">Access Denied</p>) : (<span></span>)
           }
 
           <p>            
