@@ -16,4 +16,4 @@ References: https://www.digitalocean.com/community/tutorials/how-to-add-login-au
 
 Screenshots of the site are in the `screenshots` folder.
 
-Github io page: http://ddengster.github.io/site_showcase
+Sample hosted page (no access to control panel): https://site-showcase-r2c21pyuu-ddengster.vercel.app/
