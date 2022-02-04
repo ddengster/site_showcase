@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import Login from '../landing/Login'
 import { Topbar } from './Topbar';
 import { Sidebar } from './Sidebar';
 import { Home } from './pages/Home';
@@ -9,11 +8,14 @@ import { Users } from './pages/Users';
 import { Servers } from './pages/Servers';
 import { Settings } from './pages/Settings';
 
+import { isExpired } from "react-jwt";
+
 export default function ControlPanel() {
   const [mainpage, setMainPage] = useState({ page: "HOME"});
 
   //@todo: replace with some kind of token checking
-  if (sessionStorage["token"] == null) {
+
+  if (sessionStorage["token"] == null || (sessionStorage["token"] && isExpired(sessionStorage["token"]))) {
     return (
       <React.Fragment>
         DENIED, REDIRECTING..
@@ -23,7 +25,6 @@ export default function ControlPanel() {
   }
 
   function get_contents(p : string) {
-    console.log("reload");
     
     if (p === "ANALYTICS")
       return (<Analytics/>);

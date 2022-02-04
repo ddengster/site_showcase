@@ -13,7 +13,8 @@ import {
 } from "recharts";
 
 export function getUserChartData() {
-  return fetch('http://localhost:8080/user_chart')
+  return fetch('http://localhost:8080/user_chart', 
+    { headers: { "token": "Bearer " + sessionStorage["token"] }})
     .then(data => data.json());
 }
 

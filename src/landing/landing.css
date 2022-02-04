@@ -218,3 +218,7 @@ body {
   justify-content: flex-start;
   font-size: 12px;
 }
+
+.login_denied {
+  color: #ff0000;
+}
